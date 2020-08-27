@@ -4,11 +4,13 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { ProductListComponent } from './Products/product-list.component';
 import { ConvertToSpaces } from "./shared/convert-to-spaces.pipe";
+import { StarComponent } from "./shared/star.component";
 @NgModule({
   declarations: [
     AppComponent,
     ProductListComponent,
-    ConvertToSpaces
+    ConvertToSpaces,
+    StarComponent
   ],
   imports: [
     BrowserModule,
