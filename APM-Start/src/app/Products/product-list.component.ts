@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { IProduct } from './product'
 import { ProductService } from "./product.service";
 @Component({
-    selector: 'pm-productlist',
     templateUrl: './product-list.component.html',
     styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit {
+    errorMessage: string;
 
     performFilter(filterBy: string): IProduct[] {
         filterBy = filterBy.toLowerCase();
@@ -18,7 +18,7 @@ export class ProductListComponent implements OnInit {
     imageWidth: number = 50;
     imageMargin: number = 2;
     showImage: boolean = false;
-    private _productFilter: string = "cart";
+    private _productFilter: string;
     public get productFilter(): string {
         return this._productFilter;
     }
@@ -36,12 +36,18 @@ export class ProductListComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.products = this.productService.getProducts();
-        this.filteredProducts = this.products;
+        this.productService.getProducts().subscribe(
+            {
+                next: products => {
+                    this.products = products;
+                    this.filteredProducts = this.products;
+                },
+                error: error => this.errorMessage = error
+            }
+        );
     }
 
-    constructor(private productService : ProductService) {
-        
+    constructor(private productService: ProductService) {
 
     }
 }
