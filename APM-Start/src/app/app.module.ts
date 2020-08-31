@@ -9,6 +9,7 @@ import { ProductListComponent } from './Products/product-list.component';
 import { ConvertToSpaces } from "./shared/convert-to-spaces.pipe";
 import { StarComponent } from "./shared/star.component";
 import { ProductDetailsComponent } from './products/product-details.component';
+import { ProductDetailsGuard } from './products/product-details.guard';
 import { WelcomeComponent } from "./home/welcome.component";
 @NgModule({
   declarations: [
@@ -25,7 +26,9 @@ import { WelcomeComponent } from "./home/welcome.component";
     HttpClientModule,
     RouterModule.forRoot([
       { path: 'products', component: ProductListComponent },
-      { path: 'product/:id', component: ProductDetailsComponent },
+      { path: 'product/:id', 
+      canActivate: [ProductDetailsGuard],
+      component: ProductDetailsComponent },
       { path: 'welcome', component: WelcomeComponent },
       { path: '', redirectTo: 'welcome', pathMatch: 'full' },
       { path: '**', redirectTo: 'welcome', pathMatch: 'full' } 
