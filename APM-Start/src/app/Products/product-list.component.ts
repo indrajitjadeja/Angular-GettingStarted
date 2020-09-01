@@ -8,6 +8,10 @@ import { ProductService } from "./product.service";
 export class ProductListComponent implements OnInit {
     errorMessage: string;
 
+
+    constructor(private productService: ProductService) {
+    }
+
     performFilter(filterBy: string): IProduct[] {
         filterBy = filterBy.toLowerCase();
         return this.filteredProducts.filter((product: IProduct) =>
@@ -45,9 +49,5 @@ export class ProductListComponent implements OnInit {
                 error: error => this.errorMessage = error
             }
         );
-    }
-
-    constructor(private productService: ProductService) {
-
     }
 }
