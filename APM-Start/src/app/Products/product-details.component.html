@@ -1,0 +1,83 @@
+<div class="card"
+     *ngIf='product'>
+    <div class="card-header">
+        {{pageTitle + ': ' + product.productName}}
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-4">
+                        Product Name:
+                    </div>
+                    <div class="col-md-8">
+                        {{ product.productName }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        Product Code:
+                    </div>
+                    <div class="col-md-8">
+                        {{ product.productCode | lowercase | convertToSpaces:'-' }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        Product Description:
+                    </div>
+                    <div class="col-md-8">
+                        {{ product.description }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        Product Available Date:
+                    </div>
+                    <div class="col-md-8">
+                        {{ product.releaseDate }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        Product Price:
+                    </div>
+                    <div class="col-md-8">
+                        {{ product.price | currency:'USD':'symbol':'1.2-3' }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        Star Rating:
+                    </div>
+                    <div class="col-md-8">
+                        <pm-star [rating]='product.starRating'></pm-star>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+
+                <img class="center-block img-responsive"
+                     [src]='product.imageUrl'
+                     [title]='product.productName'
+                     [style.width.px]='200'
+                     [style.margin.px]='2'>
+
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        <div class="col-md-4">
+            <button class="btn btn-outline-secondary mr-3"
+                    (click)='onBack()'
+                    style="widows: 80px;">
+                <i class="fa fa-chevron-left"></i> Back
+            </button>
+            <button class="btn btn-outline-primary"
+                    style="width: 80px"
+                    [routerLink]="['/products', product.productId, 'edit']">
+                Edit
+            </button>
+        </div>
+    </div>
+</div>
